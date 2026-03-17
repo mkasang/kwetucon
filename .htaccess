@@ -1,0 +1,22 @@
+# /kwetu_con/.htaccess
+RewriteEngine On
+RewriteBase /kwetu_con/
+
+# Rediriger tout vers public/index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
+
+# Protection des fichiers sensibles
+<FilesMatch "\.(php|ini|log)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "^(index\.php)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Désactiver l'affichage des répertoires
+Options -Indexes
