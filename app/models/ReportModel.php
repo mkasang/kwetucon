@@ -1,8 +1,8 @@
 <?php
 
-use BaseModel;
-use BlockModel;
-use UserModel;
+// use BaseModel;
+// use BlockModel;
+// use UserModel;
 // /kwetu_con/app/models/ReportModel.php
 
 require_once app_path('core/BaseModel.php');

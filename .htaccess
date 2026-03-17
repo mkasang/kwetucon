@@ -7,6 +7,10 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
 
+# Autoriser l'accès à la racine
+Options +Indexes
+DirectoryIndex public/index.php
+
 # Protection des fichiers sensibles
 <FilesMatch "\.(php|ini|log)$">
     Order Deny,Allow
@@ -17,6 +21,3 @@ RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
     Order Allow,Deny
     Allow from all
 </FilesMatch>
-
-# Désactiver l'affichage des répertoires
-Options -Indexes

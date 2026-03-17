@@ -5,6 +5,7 @@
  * Base Model pour KWETU CON
  * Gère les connexions PDO et les opérations CRUD de base
  */
+
 class BaseModel {
     protected $pdo;
     protected $table;
@@ -20,7 +21,13 @@ class BaseModel {
      * Établir la connexion à la base de données
      */
     private function connect() {
-        $config = require_once config_path('database.php');
+        $configFile = config_path('database.php');
+        
+        if (!file_exists($configFile)) {
+            die("Erreur: Fichier de configuration database.php non trouvé. Veuillez exécuter init.php d'abord.");
+        }
+        
+        $config = require $configFile;
         
         try {
             $this->pdo = new PDO(
@@ -35,7 +42,7 @@ class BaseModel {
             );
         } catch (PDOException $e) {
             error_log("Database connection failed: " . $e->getMessage());
-            die("Erreur de connexion à la base de données");
+            die("Erreur de connexion à la base de données. Vérifiez votre fichier de configuration.");
         }
     }
     

@@ -6,7 +6,7 @@
  */
 
 function base_path($path = '') {
-    return __DIR__ . '/' . ltrim($path, '/');
+    return dirname(__FILE__) . '/' . ltrim($path, '/');
 }
 
 function app_path($path = '') {

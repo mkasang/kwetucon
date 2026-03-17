@@ -1,8 +1,8 @@
 <?php
 
-use BaseModel;
-use ProfileModel;
-use UserModel;
+// use BaseModel;
+// use ProfileModel;
+// use UserModel;
 // /kwetu_con/app/models/NotificationModel.php
 
 require_once app_path('core/BaseModel.php');

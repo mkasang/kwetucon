@@ -1,6 +1,6 @@
 <?php
 
-use BaseModel;
+// use BaseModel;
 // /kwetu_con/app/models/BlockModel.php
 
 require_once app_path('core/BaseModel.php');

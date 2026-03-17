@@ -1,7 +1,7 @@
 <?php
 
-use AuthHelper;
-use BaseModel;
+// use AuthHelper;
+// use BaseModel;
 // /kwetu_con/app/models/UserModel.php
 
 require_once app_path('core/BaseModel.php');

@@ -1,8 +1,8 @@
 <?php
 
-use BaseModel;
-use ConversationModel;
-use ProfileModel;
+// use BaseModel;
+// use ConversationModel;
+// use ProfileModel;
 // /kwetu_con/app/models/MessageModel.php
 
 require_once app_path('core/BaseModel.php');
