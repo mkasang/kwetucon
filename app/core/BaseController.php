@@ -25,6 +25,7 @@ class BaseController {
         $this->data['current_user'] = $this->getCurrentUser();
         $this->data['flash_message'] = $this->getFlashMessage();
         $this->data['flash_error'] = $this->getFlashError();
+         $this->data['request_uri'] = $_SERVER['REQUEST_URI'] ?? '';
     }
     
     /**

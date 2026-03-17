@@ -3,29 +3,50 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $site_name ?> - <?= $page_title ?? 'Accueil' ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title><?= isset($site_name) ? $site_name : 'KWETU CON' ?> - <?= $page_title ?? 'Accueil' ?></title>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="<?= View::asset('css/public/style.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="<?= View::asset('css/public/style.css') ?>">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?= View::asset('images/favicon.png') ?>">
+    
+    <!-- Meta tags pour mobile -->
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
-    <!-- Header Public -->
-    <?php View::header('public', ['site_name' => $site_name]) ?>
-    
-    <!-- Contenu principal -->
-    <main class="main-content">
-        <?= View::flashMessage() ?>
-        <?= View::flashError() ?>
-        <?= $content ?? '' ?>
-    </main>
-    
-    <!-- Footer Public -->
-    <?php View::footer('public') ?>
+    <div class="site-wrapper">
+        <!-- Header Public -->
+        <?php 
+        $headerData = [
+            'site_name' => $site_name ?? 'KWETU CON',
+            'current_user' => $current_user ?? null
+        ];
+        View::header('public', $headerData); 
+        ?>
+        
+        <!-- Contenu principal -->
+        <main class="main-content">
+            <div class="container">
+                <?= View::flashMessage() ?>
+                <?= View::flashError() ?>
+            </div>
+            <?= $content ?? '' ?>
+        </main>
+        
+        <!-- Footer Public -->
+        <?php 
+        $footerData = [
+            'site_name' => $site_name ?? 'KWETU CON',
+            'current_year' => date('Y')
+        ];
+        View::footer('public', $footerData); 
+        ?>
+    </div>
     
     <!-- JavaScript -->
     <script src="<?= View::asset('js/public/app.js') ?>"></script>

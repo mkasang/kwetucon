@@ -1,43 +1,90 @@
 <!-- /kwetu_con/app/views/partials/header/header_public.php -->
 <header class="public-header">
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar">
         <div class="container">
-            <a class="navbar-brand" href="<?= View::url('/') ?>">
-                <img src="<?= View::asset('images/logo.png') ?>" alt="<?= $site_name ?>" height="40">
-            </a>
+            <div class="navbar-brand">
+                <a href="<?= View::url('/') ?>">
+                    <img src="<?= View::asset('images/logo.png') ?>" alt="<?= $site_name ?>" class="logo">
+                </a>
+            </div>
             
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPublic">
-                <span class="navbar-toggler-icon"></span>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
             
-            <div class="collapse navbar-collapse" id="navbarPublic">
-                <ul class="navbar-nav ml-auto">
+            <div class="navbar-menu" id="navbarMenu">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= View::url('/') ?>">Accueil</a>
+                        <a class="nav-link <?= strpos($_SERVER['REQUEST_URI'], '/kwetu_con/') === 8 ? 'active' : '' ?>" 
+                           href="<?= View::url('/') ?>">
+                            <i class="fas fa-home"></i>
+                            <span>Accueil</span>
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= View::url('/about') ?>">À propos</a>
+                        <a class="nav-link <?= strpos($_SERVER['REQUEST_URI'], '/about') !== false ? 'active' : '' ?>" 
+                           href="<?= View::url('/about') ?>">
+                            <i class="fas fa-info-circle"></i>
+                            <span>À propos</span>
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= View::url('/contact') ?>">Contact</a>
+                        <a class="nav-link <?= strpos($_SERVER['REQUEST_URI'], '/contact') !== false ? 'active' : '' ?>" 
+                           href="<?= View::url('/contact') ?>">
+                            <i class="fas fa-envelope"></i>
+                            <span>Contact</span>
+                        </a>
                     </li>
-                    <?php if (!isset($current_user) || !$current_user): ?>
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-outline-primary" href="<?= View::url('/login') ?>">Connexion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-primary" href="<?= View::url('/register') ?>">Inscription</a>
-                        </li>
-                    <?php else: ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= View::url('/profile') ?>">Mon Profil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= View::url('/logout') ?>">Déconnexion</a>
-                        </li>
-                    <?php endif; ?>
                 </ul>
+                
+                <div class="navbar-buttons">
+                    <?php if (!isset($current_user) || !$current_user): ?>
+                        <a href="<?= View::url('/login') ?>" class="btn btn-outline-primary">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Connexion</span>
+                        </a>
+                        <a href="<?= View::url('/register') ?>" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Inscription</span>
+                        </a>
+                    <?php else: ?>
+                        <a href="<?= View::url('/profile') ?>" class="btn btn-outline-primary">
+                            <i class="fas fa-user"></i>
+                            <span>Mon Profil</span>
+                        </a>
+                        <a href="<?= View::url('/logout') ?>" class="btn btn-danger">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Déconnexion</span>
+                        </a>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </nav>
 </header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileToggle = document.getElementById('mobileMenuToggle');
+    const navbarMenu = document.getElementById('navbarMenu');
+    
+    if (mobileToggle) {
+        mobileToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navbarMenu.classList.toggle('show');
+            document.body.classList.toggle('menu-open');
+        });
+    }
+    
+    // Fermer le menu quand on clique sur un lien
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            mobileToggle.classList.remove('active');
+            navbarMenu.classList.remove('show');
+            document.body.classList.remove('menu-open');
+        });
+    });
+});
+</script>
